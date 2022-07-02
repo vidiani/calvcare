@@ -20,10 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('products', [ProductController::class, 'all']);
-Route::get('products', [ProductCategoryController::class, 'all']);
+Route::get('productsCategory', [ProductCategoryController::class, 'all']);
 
-Route::get('register', [UserController::class, 'register']);
-Route::get('login', [UserController::class, 'login']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);

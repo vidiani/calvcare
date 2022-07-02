@@ -17,10 +17,10 @@ class UserController extends Controller
     {
         try {
             $request->validate([
-                'name' => ['required', 'string', 'max=255'],
-                'username' => ['required', 'string', 'max=255', 'unique:users'],
-                'email' => ['required', 'string', 'email', 'max=255', 'unique:users'],
-                'phone' => ['nullable', 'string', 'max=255'],
+                'name' => ['required', 'string', ],
+                'username' => ['required', 'string', ],
+                'email' => ['required', 'string', 'email',],
+                'phone' => ['required', 'string', ],
                 'password' => ['required', 'string', new Password],
             ]);
 
@@ -28,7 +28,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
-                'phone' => $request->phone_number,
+                'phone' => $request->phone,
                 'password' => Hash::make($request->password),
 
             ]);
@@ -43,6 +43,7 @@ class UserController extends Controller
                 'user' => $user
             ], 'User Registered');
         } catch (Exception $error) {
+            echo $error;
             return ResponseFormatter::error([
                 'massage' => 'Something went wrong',
                 'error' => $error
@@ -103,7 +104,7 @@ class UserController extends Controller
         ]);
 
         $user = Auth::user();
-        $user->update($data);
+        // User::update($data);
 
         return ResponseFormatter::success($user, 'Profile Update');
     }

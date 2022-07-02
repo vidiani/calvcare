@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\TransactionController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +23,17 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::middleware(['admin'])->group(function(){
+            Route::resource('product', ProductController::class);
             Route::resource('category', ProductCategoryController::class);
+            Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
+                'index', 'create', 'store', 'destroy'
+            ]);
+            Route::resource('transaction', TransactionController::class)->only([
+                'index', 'show', 'edit', 'update'
+            ]);
+            Route::resource('user', UserController::class)->only([
+                'index', 'edit', 'update', 'destroy'
+            ]);
         });
     });
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Http\Requests\ProductCategoryRequest;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
@@ -22,10 +23,10 @@ class ProductCategoryController extends Controller
 
             return DataTables::of($query)
             ->addColumn('action', function($item){
-                return ' <a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline" 
+                return ' <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 m-2 rounded shadow-lg border border-green-700 ease select-none focus:outline-none focus:shadow-outline " 
                 href="' . route('dashboard.category.edit', $item->id) . '">
                 Edit
-            </a>
+    </a>
                 <form class="inline-block" action="'. route('dashboard.category.destroy', $item->id) .'" method="POST">
                 <button class="border border-red-500 bg-red-500 text-white rounded-md px-2 py-1 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline">
                 Hapus
@@ -33,6 +34,9 @@ class ProductCategoryController extends Controller
                 '. method_field('delete') . csrf_field() . '
                 </form>
                 ';
+            })
+            ->editColumn('price', function ($item) {
+                return number_format($item->price);
             })
             ->rawColumns(['action'])
                 ->make();
@@ -47,14 +51,14 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view('page.dashboard.category.create');
+        return view('pages.dashboard.category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ProductCategoryRequest $request)
     {
@@ -69,7 +73,7 @@ class ProductCategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\ProductCategory  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show(ProductCategory $category)
     {
@@ -80,7 +84,7 @@ class ProductCategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\ProductCategory  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit(ProductCategory $category)
     {
@@ -94,7 +98,7 @@ class ProductCategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\ProductCategory  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductCategoryRequest $request, ProductCategory $category)
     {
@@ -109,7 +113,7 @@ class ProductCategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\ProductCategory  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(ProductCategory $category)
     {

@@ -23,6 +23,6 @@ class ProductGallery extends Model
 
     public function getUrlAttribute($url)
     {
-        return config('app.url') . storage::url($url);
+        return url($url);
     }
 }

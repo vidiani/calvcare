@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductGalleryRequest;
 use App\Models\Product;
 use App\Models\ProductGallery;
+use Illuminate\Support\Facades\Storage ;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -33,7 +34,7 @@ class ProductGalleryController extends Controller
             ->editColumn('url', function ($item) {
                 return '<img style="max-width: 150px;" src="'. $item->url .'"/>';
             })
-            ->editColumn('is_features', function ($item) {
+            ->editColumn('is_featured', function ($item) {
                 return $item->is_featured ? 'Yes' : 'No';
             })
             ->rawColumns(['action', 'url'])
@@ -50,7 +51,7 @@ class ProductGalleryController extends Controller
      */
     public function create(Product $product)
     {
-        return view('pages.dahsboard.gallery.create', compact('product'));
+        return view('pages.dashboard.gallery.create ', compact('product'));
     }
 
     /**
@@ -78,10 +79,10 @@ class ProductGalleryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductGallery  $productGallery
+     * @param  \App\Models\ProductGallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductGallery $productGallery)
+    public function show(ProductGallery $gallery)
     {
         //
     }
@@ -89,10 +90,10 @@ class ProductGalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductGallery  $productGallery
+     * @param  \App\Models\ProductGallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductGallery $productGallery)
+    public function edit(ProductGallery $gallery)
     {
         //
     }
@@ -101,10 +102,10 @@ class ProductGalleryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductGallery  $productGallery
+     * @param  \App\Models\ProductGallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductGalleryRequest $request, ProductGallery $productGallery)
+    public function update(ProductGalleryRequest $request, ProductGallery $gallery)
     {
         //
     }
@@ -112,13 +113,13 @@ class ProductGalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductGallery  $productGallery
+     * @param  \App\Models\ProductGallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductGallery $productGallery)
+    public function destroy(ProductGallery $gallery)
     {
-        $productGallery->delete();
+        $gallery->delete();
 
-        return redirect()->route('dashboard.product.gallery.index', $productGallery->products_id);
+        return redirect()->route('dashboard.product.gallery.index', $gallery->products_id);
     }
 }

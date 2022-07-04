@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductGallery;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -21,10 +22,12 @@ class ProductController extends Controller
             return DataTables::of($query)
             -> addColumn('action', function ($item) {
                 return '
-                <a class="inline-block border border-blue-700 bg-blue-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-blue-800 focus:outline-none focus:shadow-outline" href="' . route('dashboard.product.gallery.index', $item->id) . '">
-                Gallery
-                </a>
-                <a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline" 
+                <form class="inline-block" action="' . route('dashboard.product.gallery.index', $item->id) . '">
+                <button class="inline-block border border-green-700 bg-current text-black rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-blue-800 focus:outline-none focus:shadow-outline">
+                 Gallery
+                 </button>
+                 </form>
+                <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 m-2 rounded shadow-lg border border-green-700 ease select-none focus:outline-none focus:shadow-outline " 
                             href="' . route('dashboard.product.edit', $item->id) . '">
                             Edit
                 </a>
@@ -60,7 +63,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {

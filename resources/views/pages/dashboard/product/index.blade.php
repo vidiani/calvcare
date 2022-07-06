@@ -17,6 +17,7 @@
                     { data: 'name', name: 'name' },
                     { data: 'category.name', name: 'category.name' },
                     { data: 'price', name: 'price' },
+                    { data: 'quantity', name:'quantity'},
                     {
                         data: 'action',
                         name: 'action',
@@ -45,6 +46,7 @@
                             <th>Nama</th>
                             <th>Kategori</th>
                             <th>Harga</th>
+                            <th>Quantity</th>
                             <th>Aksi</th>
                         </tr>
                         </thead>

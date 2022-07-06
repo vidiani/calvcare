@@ -20,7 +20,8 @@ class Product extends Model
         'description',
         'price',
         'categories_id',
-        'tags'
+        'tags',
+        'quatity'
     ];
 
     public function galleries()

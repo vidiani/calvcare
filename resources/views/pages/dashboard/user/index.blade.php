@@ -16,6 +16,7 @@
                     { data: 'id', name: 'id', width: '5%'},
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
+                    { data: 'address', name: 'address'},
                     { data: 'roles', name: 'roles' },
                     {
                         data: 'action',
@@ -39,6 +40,7 @@
                             <th>ID</th>
                             <th>Nama</th>
                             <th>Email</th>
+                            <th>Address</th>
                             <th>Roles</th>
                             <th>Aksi</th>
                         </tr>

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('products', [ProductController::class, 'all']);
 Route::get('productsCategory', [ProductCategoryController::class, 'all']);
 
-Route::post('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register'])->middleware('cors');
 Route::post('login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user', [UserController::class, 'updateProfile']);
     Route::post('logout', [UserController::class, 'logout']);
 
-    Route::get('transaction', [TransactionController::class, 'all']);
+    Route::get('transaction', [TransactionController::class, 'all'])->middleware('cors');
     Route::post('checkout', [TransactionController::class, 'checkout']);
 });
 

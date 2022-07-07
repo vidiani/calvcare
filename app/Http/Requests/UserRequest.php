@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'username' => 'required|string|max:255',
-            'addess' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
             'roles' => 'required|string|max:255|in:USER,ADMIN'
         ];
     }

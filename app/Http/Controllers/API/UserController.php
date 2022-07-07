@@ -18,23 +18,23 @@ class UserController extends Controller
     * @return \Illuminate\Http\JsonResponse
     * @throws \Exception
     */
-    public function register (Request $request)
+    public function register(Request $request)
     {
         try {
             $request->validate([
-                'name' => ['required', 'string' ],
-                'username' => ['required', 'string' ],
-                'email' => ['required', 'string', 'email'],
-                'address' => ['required', 'string', 'address'],
-                'phone' => ['required', 'string'],
-                'password' => ['required', 'string', new Password],
+                'name' => ['required', 'string'],
+                'email' => ['required', 'string', 'unique:users'],
+                'username' => ['required', 'string'],
+                'street' => ['required', 'string'],
+                'phone' => ['nullable', 'string'],
+                'password' => ['required', 'string'],
             ]);
 
             User::create([
                 'name' => $request->name,
-                'username' => $request->username,
                 'email' => $request->email,
-                'address' => $request->address,
+                'username' => $request->username,
+                'street' => $request->street,
                 'phone' => $request->phone,
                 'password' => Hash::make($request->password),
 
@@ -106,9 +106,9 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max=255'],
             'username' => ['required', 'string', 'max=255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max=255', 'unique:users'],
-            'address' => ['required', 'string', 'address', 'max=255'],
+            'street' => ['required', 'string', 'street', 'max=255'],
             'phone' => ['nullable', 'string', 'max=255'],
-            'password' => ['required', 'string', new Password],
+            'password' => ['required', 'string'],
         ]);
 
         $user = Auth::user();

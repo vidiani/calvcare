@@ -13,15 +13,20 @@ use Laravel\Fortify\Rules\Password;
 
 class UserController extends Controller
 {
+    /** 
+    * @param Request
+    * @return \Illuminate\Http\JsonResponse
+    * @throws \Exception
+    */
     public function register (Request $request)
     {
         try {
             $request->validate([
-                'name' => ['required', 'string', ],
-                'username' => ['required', 'string', ],
-                'email' => ['required', 'string', 'email',],
+                'name' => ['required', 'string' ],
+                'username' => ['required', 'string' ],
+                'email' => ['required', 'string', 'email'],
                 'address' => ['required', 'string', 'address'],
-                'phone' => ['required', 'string', ],
+                'phone' => ['required', 'string'],
                 'password' => ['required', 'string', new Password],
             ]);
 
@@ -107,7 +112,7 @@ class UserController extends Controller
         ]);
 
         $user = Auth::user();
-        // User::update($data);
+        User::update($data);
 
         return ResponseFormatter::success($user, 'Profile Update');
     }

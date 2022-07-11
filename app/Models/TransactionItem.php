@@ -9,11 +9,6 @@ class TransactionItem extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'users_id',
         'products_id',

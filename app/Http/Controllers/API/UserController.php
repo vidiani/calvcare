@@ -24,7 +24,7 @@ class UserController extends Controller
             $request->validate([
                 'name' => ['required', 'string'],
                 'email' => ['required', 'string', 'unique:users'],
-                'username' => ['required', 'string'],
+                'username' => ['required', 'string', 'unique:users'],
                 'street' => ['required', 'string'],
                 'phone' => ['nullable', 'string'],
                 'password' => ['required', 'string'],
@@ -102,14 +102,7 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $data = $request->all();
-        $request->validate([
-            'name' => ['required', 'string', 'max=255'],
-            'username' => ['required', 'string', 'max=255', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max=255', 'unique:users'],
-            'street' => ['required', 'string', 'street', 'max=255'],
-            'phone' => ['nullable', 'string', 'max=255'],
-            'password' => ['required', 'string'],
-        ]);
+       
 
         $user = Auth::user();
         User::update($data);

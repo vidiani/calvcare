@@ -21,27 +21,27 @@ class TransactionController extends Controller
             $transaction = Transaction::with(['items.product'])->find($id);
 
             if($transaction)
-            {
+
                 return ResponseFormatter::success(
                     $transaction,
                     'Data transaksi berhasil diambil'
                 );
-            }
-            else{
+            
+            else
                 return ResponseFormatter::error(
                     null,
                     'Data transaksi tidak ada',
                     404
                 );
-            }
+            
         }
 
         $transaction = Transaction::with(['items.product'])->where('users_id', Auth::user()->id);
 
         if($status)
-        {
+        
         $transaction->where('status', $status);
-        }
+        
 
         return ResponseFormatter::success(
             $transaction->paginate($limit),
@@ -49,6 +49,10 @@ class TransactionController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function checkout(Request $request)
     {
         $request->validate([

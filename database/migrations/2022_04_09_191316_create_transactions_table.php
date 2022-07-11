@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration
             
             $table->bigInteger('users_id');
 
-            $table->text('address')->nullable();
+            $table->text('street')->nullable();
 
             $table->float('total_price')->daefult(0);
             $table->float('shipping_price')->default(0);

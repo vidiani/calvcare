@@ -14,6 +14,7 @@ class TransactionItem extends Model
         'products_id',
         'transactions_id',
         'quantity',
+        'weight'
     ];
 
     public function product()

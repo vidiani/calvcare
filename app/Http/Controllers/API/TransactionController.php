@@ -76,7 +76,7 @@ class TransactionController extends Controller
                 'users_id' => Auth::user()->id,
                 'products_id' => $product['id'],
                 'transactions_id' => $transaction->id,
-                'quantity' => $product['quantity']
+                'quantity' => $product['quantity'],
             ]);
         }
 

@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->longText('description');
 
             $table->string('tags')->nullable();
+            $table->float('weight');
 
             $table->bigInteger('categories_id');
             
